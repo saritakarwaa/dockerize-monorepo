@@ -1,8 +1,9 @@
+console.log("✅ Bun is running the script!");
 import express from "express"
 import {prismaClient} from "db/client"
 const app=express()
 
-
+app.use(express.json())
 app.get("/users",(req,res)=>{
     prismaClient.user.findMany()
         .then(users=>{
@@ -29,3 +30,5 @@ app.post("/user",(req,res)=>{
             res.status(500).json({error:err.message})
     })
 })
+
+app.listen(8080)
